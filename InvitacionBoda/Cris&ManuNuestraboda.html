@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<link rel="icon" href="Images/logo.jpg" type="image/png">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristian & Manuela - Nuestra Boda</title>
+
+<!-- Fuentes -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@700&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html {
+  height: 100%;
+  font-family: 'Handlee', cursive;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #1a1a1a, #2e2e2e);
+  color: #fff;
+}
+
+/* ===== TITULOS ===== */
+h1, h2, h3 {
+  font-family: 'Great Vibes', cursive !important;
+  color: #F8F0E3;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+}
+
+h3 {
+  font-size: 40px; /* Cambia el número al tamaño que quieras */
+  color: #D4A95D;
+}
+
+/* ===== PORTADA ===== */
+.portada {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('Images/portada.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+}
+
+.portada h1 { font-size: 80px; position: relative; z-index:3; margin-bottom:15px; }
+.portada h2 { font-size: 46px; position: relative; z-index:3; }
+.portada p { font-size: 32px; position: relative; z-index:3; color:#fff; text-shadow:1px 1px 4px rgba(0,0,0,0.7); }
+
+.flecha {
+  position: absolute; bottom:40px; font-size:40px; color:white;
+  animation: mover-bajar 1s infinite ease-in-out;
+}
+
+@keyframes mover-bajar {
+  0%,100% { transform: translateY(0); opacity:1; }
+  50% { transform: translateY(15px); opacity:0.7; }
+}
+
+/* ===== DESTELLOS ===== */
+.destellos {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.destello {
+  position: absolute;
+  width: 2px;
+  height: 3px;
+  background: radial-gradient(circle, rgba(178, 178, 176, 0.9) 0%, rgba(85, 81, 81, 0.3) 700%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0;
+  animation: brillar 1s infinite ease-in-out;
+}
+
+.destello::after {
+  width: 10px;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, rgba(255,230,160,0.9), transparent);
+}
+
+@keyframes brillar {
+  0%,500% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
+}
+
+/* ===== BOTÓN SONIDO ===== */
+#btn-sonido {
+  position: fixed; bottom: 20px; right: 20px;
+  z-index: 1000;
+  padding: 10px;
+  background-color: white;
+  color: rgb(8, 8, 8);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+#btn-sonido:hover { background-color: #030302; transform: scale(1.05); }
+#btn-sonido::before { content: '▶'; }
+#btn-sonido.playing::before { content: '⏸'; }
+
+/* ===== CONTEO REGRESIVO ===== */
+.conteo { text-align:center; padding:50px 20px; color:#fff; position:relative; z-index:2; }
+.conteo-texto { max-width:650px; margin:0 auto; }
+.contador { display:flex; justify-content:center; flex-wrap:wrap; gap:40px; margin-top:30px; }
+.contador div { display:flex; flex-direction:column; align-items:center; padding:0; border:none; min-width:auto; }
+
+.contador div span:first-child {
+  font-size:70px !important;
+  font-family: 'Roboto Serif', serif !important;
+  font-weight:700;
+  color:#F8F0E3;
+  text-shadow:2px 2px 8px rgba(5, 5, 5, 0.7);
+  animation: respirar 3s ease-in-out infinite;
+  transition: all 0.4s ease;
+}
+
+@keyframes respirar {
+  0%,100% { transform: scale(1); opacity:0.92; }
+  50% { transform: scale(1.03); opacity:1; }
+}
+
+.brilho {
+  color: #FFD700;
+  text-shadow:
+    0 0 8px #FFD700,
+    0 0 16px #FFD700,
+    0 0 24px #FFD700,
+    0 0 32px rgba(255,215,0,0.6),
+    0 0 48px rgba(255,215,0,0.4);
+  animation: resplandor 1s ease forwards;
+}
+
+@keyframes resplandor {
+  0% { text-shadow:2px 2px 6px rgba(0,0,0,0.7); color:#F8F0E3; }
+  50% { 
+    color:#FFD700;
+    text-shadow:
+      0 0 12px #FFD700,
+      0 0 24px #FFD700,
+      0 0 36px #FFD700,
+      0 0 48px rgba(255,215,0,0.6),
+      0 0 60px rgba(255,215,0,0.4);
+  }
+  100% { text-shadow:2px 2px 6px rgba(0,0,0,0.7); color:#F8F0E3; }
+}
+
+/* ===== EVENTOS, GALERÍA, INFO y CONFIRMACIÓN ===== */
+.eventos, .info-section, .confirmacion-final { text-align:center; color:#fff; padding:60px 20px; z-index:2; position:relative; }
+.evento-container { margin: 0 auto; max-width: 400px; }
+.evento-container img, .info-section img { width:100%; max-width:120px; border-radius:10px; margin-bottom:20px; }
+.boton-mapa { display:inline-block; margin-top:20px; padding:10px 30px; background-color:transparent; color:#D4A95D; border:2px solid #D4A95D; border-radius:5px; text-decoration:none; transition:all 0.3s ease; }
+.boton-mapa:hover { background-color:#D4A95D; color:#fff; }
+.galeria-fotos { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; max-width:900px; margin:50px auto; z-index:2; position:relative; }
+.galeria-fotos img { width:30%; max-width:250px; border-radius:10px; object-fit:cover; transition: transform 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease; }
+.galeria-fotos img:hover { transform: scale(1.05); filter: brightness(1.2) saturate(1.3) hue-rotate(15deg); box-shadow: 0 0 20px rgba(114, 114, 112, 0.258), 0 0 30px rgba(206, 206, 205, 0.3); cursor: pointer; }
+.mensaje-eclesiastes { max-width:700px; margin:40px auto; padding:20px; color:#ddd; background-color:rgba(255,255,255,0.05); border-left:5px solid #D4A95D; text-align:center; font-style:italic; }
+.confirmacion-final .boton-portada { display:inline-block; padding:10px 30px; background-color:#D4A95D; color:#fff; border-radius:5px; text-decoration:none; transition:all 0.3s ease; }
+.confirmacion-final .boton-portada:hover { background-color:#fff; color:#D4A95D; }
+
+/* ===== FORMULARIO CONFIRMACIÓN ===== */
+.form-confirmacion { margin-top:30px; text-align:left; max-width:400px; margin-left:auto; margin-right:auto; }
+.form-confirmacion label { display:block; margin-top:15px; font-size:18px; color:#F8F0E3; }
+.form-confirmacion input[type="text"], .form-confirmacion textarea {
+  width:100%; padding:10px; margin-top:5px; border:none; border-bottom:2px solid #888;
+  outline:none; background-color: transparent; color:#fff; font-family:'Handlee', cursive; font-size:16px;
+  transition: all 0.3s ease;
+}
+.form-confirmacion input[type="text"]:hover, 
+.form-confirmacion input[type="text"]:focus,
+.form-confirmacion textarea:hover,
+.form-confirmacion textarea:focus {
+  border-bottom-color: #fbf3c0;
+  box-shadow: 0 0 8px #fbf3c0;
+}
+
+.form-confirmacion textarea { resize:none; height:60px; }
+
+#btn-confirmar {
+  margin-top:20px; padding:12px 30px; background-color:#D4A95D; color:#fff; border:none; border-radius:5px;
+  cursor:pointer; font-size:18px; font-family:'Handlee', cursive; width:100%;
+  transition: all 0.3s ease;
+}
+#btn-confirmar:disabled { background-color: rgba(212,169,93,0.5); cursor:not-allowed; }
+#btn-confirmar:hover:not(:disabled) { background-color:#fff; color:#D4A95D; }
+
+/* ===== BOTONES DE ASISTENCIA ===== */
+.asistencia-botones { display: flex; gap: 40px; margin-top: 10px; justify-content: center; }
+.asistencia-botones input[type="radio"] { display: none; }
+.asistencia-botones label {
+  font-family: 'Handlee', cursive;
+  font-size: 18px;
+  color: #F8F0E3;
+  padding: 10px 20px;
+  border-bottom: 2px solid #F8F0E3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.asistencia-botones input[type="radio"]:checked + label {
+  color: #D4A95D;
+  border-bottom: 2px solid #D4A95D;
+}
+.asistencia-botones label:hover {
+  text-shadow: 0 0 8px #FFD700, 0 0 16px #FFD700;
+}
+
+/* ===== NOTA DESTACADA ===== */
+.nota-aviso {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px 25px;
+  background-color: rgba(212, 169, 93, 0.1);
+  border-left: 5px solid #D4A95D;
+  color: #fff;
+  text-align: center;
+  font-style: italic;
+  position: relative;
+  box-shadow: 0 0 15px rgba(212,169,93,0.3);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+.nota-aviso:hover { transform: scale(1.02); }
+.nota-aviso::before {
+  content: "⚠️";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+}
+
+/* ===== PIE DE PÁGINA ===== */
+.footer {
+  background-color: rgba(34, 33, 33, 0.8);
+  padding: 5px 5px;
+  text-align: center;
+  color: #e2c08a;
+  font-family: 'Handlee', cursive, negrita;
+  position: relative;
+  z-index: 2;
+  margin-top: 6px;
+  box-shadow: 0 -4px 30px rgba(0,0,0,0.3);
+}
+
+.footer-logo {
+  max-width: 400px;
+  margin-bottom: 80px;
+}
+
+.footer p {
+  font-size: 20px;
+  margin: 6px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .footer-logo { max-width: 300px; }
+  .footer p { font-size: 14px; }
+  .galeria-fotos img { width:80%; }
+  .portada h1 { font-size:50px; }
+  .portada h2 { font-size:22px; }
+  h3 { font-size:20px; }
+  .contador div span:first-child { font-size:45px !important; }
+}
+@media(max-width:1024px){
+  .portada h1 { font-size:65px; }
+  .portada h2 { font-size:28px; }
+  h3 { font-size:24px; }
+  .contador div span:first-child { font-size:50px !important; }
+}
+</style>
+</head>
+
+<body>
+<div class="destellos" id="destellos"></div>
+
+<section class="portada">
+  <div class="portada-filtro"></div>
+  <h1>Cristian & Manuela</h1>
+  <h2> - 6 de Diciembre de 2025 -</h2>
+  <div class="flecha">⬇</div>
+</section>
+
+<button id="btn-sonido"></button>
+
+<section class="conteo">
+  <div class="conteo-texto">
+    <h3>Nos Casamos</h3>
+    <p>Si sabemos lo que es el amor, porque lo aprendimos juntos. Deseamos que formes parte de la que de momento, es la celebración más importante de nuestras vidas.</p>
+  </div>
+  <div class="contador">
+    <div><span id="dias">00</span><span>Días</span></div>
+    <div><span id="horas">00</span><span>Horas</span></div>
+    <div><span id="minutos">00</span><span>Minutos</span></div>
+  </div>
+</section>
+
+<section class="eventos">
+  <div class="evento-container">
+    <img src="Images/ceremonia.png" alt="Parroquia La Divina Eucaristía">
+    <h3>Ceremonia</h3>
+    <p>Parroquia La Divina Eucaristía</p>
+    <p>Carrera 36 #7 - 56 (Poblado)</p>
+    <p>4:00 pm</p>
+    <a href="https://maps.app.goo.gl/o4fZEi9JkrG4MQ7w8" class="boton-mapa">Cómo Llegar</a>
+  </div> <br><br>
+
+  <div class="evento-container">
+    <img src="Images/celebracion.png" alt="Hotel Dann Carlton">
+    <h3>Recepción</h3>
+    <p>Hotel Dann Carlton - Salón Provenza</p>
+    <p>Carrera 43A #7 - 50 (Poblado)</p>
+    <p>5:00 pm</p>
+    <a href="https://maps.app.goo.gl/oUk534xPRmTk7N4v7" class="boton-mapa">Cómo Llegar</a>
+  </div>
+
+  <div class="mensaje-eclesiastes">
+    Valen más dos juntos que uno solo, porque es mayor la recompensa del esfuerzo. Si caen, uno levanta a su compañero; pero ¡pobre del que está solo y se cae, sin tener a nadie que lo levante! Además, si se acuestan juntos, sienten calor, pero uno solo ¿Cómo se calentará? Y a uno solo se lo domina, pero los dos podrán resistir, porque la cuerda trenzada no se rompe fácilmente.
+    <h2><strong>Eclesiastés 4:9-12</strong></h2>
+  </div>
+
+  <div class="galeria-fotos">
+    <img src="Images/DSC_0027.JPG" alt="Foto 1">
+    <img src="Images/DSC_0010.JPG" alt="Foto 2">
+    <img src="Images/DSC_0048.JPG" alt="Foto 3">
+  </div>
+
+  <div class="info-section">
+    <div class="vestuario-container">
+      <img src="Images/vestuario.png" alt="Vestuario">
+      <h3>Código de Vestuario</h3>
+      <br>
+      <p>Traje formal</p> 
+      <p>Mujeres | Vestido Largo o Conjuto Pantalon </p>
+      <p>Hombres | Traje (corbata opcional)</p>
+    <br>
+      <p>Por favor no usar <br> Mujeres: Blanco | Hombres: Azul</p>
+    </div>
+    <br><br>
+    <div class="regalo-container">
+      <img src="Images/sobre.png" alt="Regalo">
+      <p>Y si quieres darnos un detalle, que sea fácil de cargar en un sobre 💌</p>
+    </div><br>
+
+    <div class="nota-aviso">
+      Nos gustan tanto los niños, que no queremos que se desvelen ni que pasen frío en este evento.
+    </div>
+
+    <div class="confirmacion-final">
+      <h3>Confirma tu Asistencia</h3>
+      <p>Tu presencia hará nuestro día aún más especial.<br>Confirma antes del 15 de Noviembre.</p>
+
+      <form class="form-confirmacion" id="form-confirmacion">
+        <label for="nombre">Nombre Completo</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label>¿Asistirás?</label>
+        <div class="asistencia-botones">
+          <input type="radio" name="asistira" id="asistira-si" value="Sí" required>
+          <label for="asistira-si">Sí</label>
+          <input type="radio" name="asistira" id="asistira-no" value="No">
+          <label for="asistira-no">No</label>
+        </div>
+
+        <label for="mensaje">Alergico a algún Alimento?</label>
+        <textarea id="mensaje" name="mensaje"></textarea>
+
+        <button type="submit" id="btn-confirmar" disabled>Confirmar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PIE DE PÁGINA ===== -->
+<footer class="footer">
+  <img src="Images/logonegro.png" alt="Logo" class="footer-logo">
+  <h3> Te Esperamos</h3>
+
+  <p>© 2025 CRISTIAN Y MANUELA</p>
+</footer>
+
+<script>
+// Botón de sonido
+const botonSonido = document.getElementById('btn-sonido');
+const musicaFondo = new Audio('boda.mp3');
+musicaFondo.loop = true;
+let isPlaying = false;
+botonSonido.addEventListener('click', () => {
+  if(isPlaying){
+    musicaFondo.pause();
+    botonSonido.classList.remove('playing');
+  } else{
+    musicaFondo.play();
+    botonSonido.classList.add('playing');
+  }
+  isPlaying = !isPlaying;
+});
+
+// Conteo regresivo
+const fechaBoda = new Date("December 6, 2025").getTime();
+function actualizarConteo() {
+  const ahora = new Date().getTime();
+  const diferencia = fechaBoda - ahora;
+  if(diferencia < 0) {
+    clearInterval(intervalo);
+    ["dias","horas","minutos"].forEach(id => document.getElementById(id).textContent="00");
+    return;
+  }
+  const dias = Math.floor(diferencia / (1000*60*60*24));
+  const horas = Math.floor((diferencia % (1000*60*60*24)) / (1000*60*60));
+  const minutos = Math.floor((diferencia % (1000*60*60)) / (1000*60));
+  const formatTime = t => t<10?'0'+t:t;
+  const ids = ["dias","horas","minutos"];
+  const valores = [formatTime(dias), formatTime(horas), formatTime(minutos)];
+  ids.forEach((id,i)=>{
+    const span = document.getElementById(id);
+    if(span.textContent !== valores[i]){
+      span.textContent = valores[i];
+      span.classList.add("brilho");
+      setTimeout(()=>span.classList.remove("brilho"),1000);
+    }
+  });
+}
+actualizarConteo();
+const intervalo = setInterval(actualizarConteo,60000);
+
+// Destellos
+const fondo = document.getElementById('destellos');
+for(let i=0;i<20;i++){
+  const d=document.createElement('div');
+  d.classList.add('destello');
+  d.style.top=Math.random()*100+'%';
+  d.style.left=Math.random()*100+'%';
+  d.style.animationDelay=Math.random()*5+'s';
+  fondo.appendChild(d);
+}
+
+// Activar botón Confirmar
+const form = document.getElementById('form-confirmacion');
+const btnConfirmar = document.getElementById('btn-confirmar');
+const nombreInput = document.getElementById('nombre');
+const mensajeInput = document.getElementById('mensaje');
+const asistenciaRadios = document.querySelectorAll('input[name="asistira"]');
+
+function validarFormulario(){
+  const nombreValido = nombreInput.value.trim() !== '';
+  const asistenciaValida = Array.from(asistenciaRadios).some(r=>r.checked);
+  btnConfirmar.disabled = !(nombreValido && asistenciaValida);
+}
+
+nombreInput.addEventListener('input', validarFormulario);
+asistenciaRadios.forEach(r=>r.addEventListener('change', validarFormulario));
+
+// Enviar información por WhatsApp
+form.addEventListener('submit', e=>{
+  e.preventDefault();
+  const nombre = encodeURIComponent(nombreInput.value);
+  const asistira = encodeURIComponent(document.querySelector('input[name="asistira"]:checked').value);
+  const mensaje = encodeURIComponent(mensajeInput.value);
+  const textoWhatsapp = `Hola, quiero confirmar mi asistencia a la boda de Cristian y Manuela.%0ANombre: ${nombre}%0AAsistiré: ${asistira}%0AAlergias: ${mensaje}`;
+  const urlWhatsapp = `https://wa.me/573117241637?text=${textoWhatsapp}`;
+  window.open(urlWhatsapp, '_blank');
+  form.reset();
+  btnConfirmar.disabled = true;
+});
+</script>
+</body>
+</html>
